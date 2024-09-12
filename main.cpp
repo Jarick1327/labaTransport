@@ -3,7 +3,7 @@
 
 using namespace std; //cin cout
 //1 лошадиная сила = 735,49875 Ватт
-const double watt_in_hourses = 735,49875;
+const double watt_in_hourses = 735.49875;
 
 class Veicle {
     private:
@@ -17,6 +17,17 @@ class Veicle {
         ~Veicle(); //деструктор
         Veicle(const Veicle &p); //копирующий конструктор
         void look_car(); //метод класса
+};
+
+class Track {
+    private:
+        std::string name;
+        double distance;
+    public:
+        Track (std::string v_name); //конструктор
+        ~Track(); //деструктор
+        Track(const Track &p); //копирующий конструктор
+        void look_Track(); //метод класса
 };
 
 //конструктор
@@ -61,6 +72,36 @@ void Veicle::look_car() {
     cout<<endl<<" Мощность двигателя в ваттах: "<<power_of_engine_watt<<endl;
 }
 
+//конструктор
+Track::Track(std::string t_name) {
+    cout<<endl;
+    cout<<" Введите имя трассы латиницей: "<<endl;
+    cin>>t_name;
+    //cout<<" Мы записали: "<<t_name<<endl;
+    name = t_name;
+    //cout<<" Мы записали: "<<name<<endl;
+    cout<<" Введите длину трассы в км (положительная десятичная дробь): "<<endl;
+    cin>>distance;
+}
+
+//деструктор
+Track::~Track() {
+    cout<<endl<<" Мы удалили трассу "<< name <<"."<<endl;
+}
+
+//копирующий конструктор: без него неявно стираются объекты
+Track::Track(const Track &p) {
+    //у нас this слева от равно
+    name = p.name;
+    distance = p.distance;
+}
+
+//метод класса
+void Track::look_Track() {
+    cout<<endl<<" Трасса: "<<name;
+    cout<<endl<<" Дистанция: "<<distance<<endl;
+}
+
 int main()
 {
     setlocale(LC_ALL, "\Russian"); //разрешает использовать кириллицу
@@ -69,6 +110,9 @@ int main()
 
     Veicle car("My car");
     car.look_car();
+    Track road1("My car");
+    road1.look_Track();
+
 
 
     return 0;
